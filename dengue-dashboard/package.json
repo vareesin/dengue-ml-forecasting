@@ -2,7 +2,7 @@
   "name": "dengue-dashboard",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://vareesin.github.io/dengue-ml-forecasting/dengue-dashboard",
+  "homepage": "https://vareesin.github.io/dengue-ml-forecasting",
   "type": "module",
   "scripts": {
     "dev": "vite",
