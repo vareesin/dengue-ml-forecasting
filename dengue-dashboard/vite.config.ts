@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/dengue-ml-forecasting/dengue-dashboard/',
+  base: '/dengue-ml-forecasting/', 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
