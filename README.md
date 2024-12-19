@@ -2,55 +2,11 @@
 
 > Advanced time series forecasting models for predicting dengue fever cases in Thailand's Health District 12
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![R](https://img.shields.io/badge/R-4.0%2B-blue)](https://www.r-project.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-## 📋 Table of Contents
-- [Project Overview](#-project-overview)
-- [Key Findings](#-key-findings)
-- [Repository Structure](#-repository-structure)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Model Details](#-model-details)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [Authors](#-authors)
-- [License](#-license)
-- [Citation](#-citation)
-
 ## 🔍 Project Overview
 
-This research focuses on forecasting dengue fever cases in Thailand's Health District 12, which includes:
+This research focuses on forecasting dengue fever cases in Thailand's Health District 12
+📊 **Project information and Interactive Dashboard**: [View Here](https://vareesin.github.io/dengue-ml-forecasting/)
 
-🏙️ Songkhla
-🌊 Satun
-🌴 Trang
-🗺️ Phatthalung
-🕌 Pattani
-🌅 Yala
-🌿 Narathiwat
-
-**Time Period**: 2015-2023 (Monthly Data)
-
-## 📊 Key Findings
-
-### Best Model: Neural Network Autoregressive (NNAR)
-```python
-Configuration: NNAR(2,1,2)
-```
-
-| Metric | Value |
-|--------|--------|
-| MSE | 439,337.643 |
-| RMSE | 662.825 |
-| MAPE | 68.205% |
-
-### 📐 Optimal Trend Equation
-```math
-yt = 0.2797t² + 2664.5478 + Ss
-```
-> where Ss represents seasonal indices
 
 ## 📁 Repository Structure
 
@@ -81,30 +37,11 @@ dengue-ml-forecasting/
 
 1. **Clone Repository**
 ```bash
-git clone https://github.com/username/dengue-ml-forecasting.git
+git clone https://github.com/vareesin/dengue-ml-forecasting.git
 cd dengue-ml-forecasting
 ```
 
-2. **Create Virtual Environment**
-<details>
-<summary>Windows</summary>
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-</details>
-
-<details>
-<summary>Linux/Mac</summary>
-
-```bash
-python -m venv venv
-source venv/bin/activate
-```
-</details>
-
-3. **Install Dependencies**
+2. **Install Dependencies**
 ```bash
 pip install -r requirements.txt
 ```
@@ -129,10 +66,9 @@ Place your data in `data/dataset_dengue.csv`:
 time,n
 2015-01,123
 2015-02,456
-...
 ```
 
-### 🐍 Python Implementation
+### Python Implementation
 
 1. **NNAR Model**
 ```bash
@@ -154,7 +90,7 @@ python python/random_forest_model.py
 python python/decomposition.py
 ```
 
-### 📈 R Implementation
+### R Implementation
 
 1. **NNAR Model**
 ```r
@@ -176,57 +112,6 @@ source("R/random_forest_model.R")
 source("R/decomposition.R")
 ```
 
-## ⚙️ Model Details
-
-### 🔧 Parameter Customization
-
-<details>
-<summary>Python Configuration</summary>
-
-```python
-# NNAR
-model = NNARModel(
-    p=2,    # Non-seasonal lags
-    P=1,    # Seasonal lags
-    k=2     # Hidden nodes
-)
-
-# Random Forest
-rf_model = RandomForestModel(
-    n_estimators=100,
-    max_depth=None
-)
-
-# ARIMA
-arima_model = ARIMAModel(
-    order=(1,1,0)
-)
-```
-</details>
-
-<details>
-<summary>R Configuration</summary>
-
-```r
-# NNAR
-model <- nnetar(y, p=2, P=1, size=2)
-
-# Random Forest
-rf_model <- randomForest(
-    formula,
-    ntree=100,
-    mtry=3
-)
-
-# ARIMA
-arima_model <- auto.arima(
-    y,
-    seasonal=FALSE,
-    stepwise=TRUE
-)
-```
-</details>
-
 ### 📊 Model Outputs
 
 Each model generates:
@@ -242,9 +127,6 @@ Each model generates:
   - Feature importance (Random Forest)
   - Training history (NNAR)
   - Seasonal decomposition plots
-
-Data visualization/Dengue forecasting dashboard
-https://vareesin.github.io/dengue-ml-forecasting/
 
 ## 👥 Authors
 - 👩‍💻 **Varees Adulyasas**
@@ -275,6 +157,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Islamic Science Demonstration School**
 
 ---
-<p align="center">
 Made with ❤️ by the Research Team
-</p>
