@@ -1,146 +1,280 @@
-# Dengue Forecasting Model
+# 🦟 Dengue Fever Forecasting Model
 
-This repository contains the implementation of various time series forecasting models for predicting dengue fever cases in Thailand's Health District 12. The project implements and compares multiple forecasting approaches as described in our research paper.
+> Advanced time series forecasting models for predicting dengue fever cases in Thailand's Health District 12
 
-## Project Overview
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![R](https://img.shields.io/badge/R-4.0%2B-blue)](https://www.r-project.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Thailand's Health District 12 (comprising Songkhla, Satun, Trang, Phatthalung, Pattani, Yala, and Narathiwat provinces) has experienced significant dengue fever outbreaks. This project aims to develop accurate forecasting models to predict dengue fever cases using historical data from 2015-2023.
+## 📋 Table of Contents
+- [Project Overview](#-project-overview)
+- [Key Findings](#-key-findings)
+- [Repository Structure](#-repository-structure)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Model Details](#-model-details)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [Authors](#-authors)
+- [License](#-license)
+- [Citation](#-citation)
 
-### Research Findings
+## 🔍 Project Overview
 
-The research evaluated multiple forecasting approaches, with key findings:
+This research focuses on forecasting dengue fever cases in Thailand's Health District 12, which includes:
 
-- Best Performing Model: Neural Network Autoregressive (NNAR) model
-  - Configuration: NNAR(2,1,2)
-  - MSE: 439,337.643
-  - RMSE: 662.825
-  - MAPE: 68.205%
+🏙️ Songkhla
+🌊 Satun
+🌴 Trang
+🗺️ Phatthalung
+🕌 Pattani
+🌅 Yala
+🌿 Narathiwat
 
-- Best Trend Equation:
-  ```
-  yt = 0.2797t² + 2664.5478 + Ss
-  ```
-  where Ss represents seasonal indices
+**Time Period**: 2015-2023 (Monthly Data)
 
-Data visualization/Dengue forecasting dashboard
-https://vareesin.github.io/dengue-ml-forecasting/
+## 📊 Key Findings
 
-## Models Implemented
+### Best Model: Neural Network Autoregressive (NNAR)
+```python
+Configuration: NNAR(2,1,2)
+```
 
-1. **NNAR (Neural Network Autoregressive)**
-   - Implementation: `ann_model.py`
-   - Architecture: NNAR(2,1,2)
-   - Features: Seasonal and non-seasonal lags
-   - Best performing model overall
+| Metric | Value |
+|--------|--------|
+| MSE | 439,337.643 |
+| RMSE | 662.825 |
+| MAPE | 68.205% |
 
-2. **ARIMA (Autoregressive Integrated Moving Average)**
-   - Implementation: `arima_model.py`
-   - Configuration: ARIMA(1,1,0)
-   - Includes stationarity testing
-   - Competitive performance for short-term forecasts
+### 📐 Optimal Trend Equation
+```math
+yt = 0.2797t² + 2664.5478 + Ss
+```
+> where Ss represents seasonal indices
 
-3. **Random Forest**
-   - Implementation: `random_forest_model.py`
-   - Features: Lag indicators and rolling statistics
-   - Good performance with non-linear patterns
+## 📁 Repository Structure
 
-4. **Time Series Decomposition**
-   - Implementation: `decomposition.py`
-   - Components: Trend, Seasonal, Residual
-   - Used for understanding underlying patterns
+```plaintext
+dengue-ml-forecasting/
+├── 📂 data/
+│   └── 📄 dataset_dengue.csv
+├── 📂 R/
+│   ├── 📄 arima_model.R
+│   ├── 📄 random_forest_model.R
+│   ├── 📄 ann_model.R
+│   └── 📄 decomposition.R
+├── 📂 python/
+│   ├── 📄 arima_model.py
+│   ├── 📄 random_forest_model.py
+│   ├── 📄 ann_model.py
+│   └── 📄 decomposition.py
+├── 📂 results/
+│   └── 📂 figures/
+├── 📄 requirements.txt
+├── 📄 renv.lock
+└── 📄 README.md
+```
 
-## Installation
+## 💻 Installation
 
-1. Clone the repository:
+### 🐍 Python Setup
+
+1. **Clone Repository**
 ```bash
 git clone https://github.com/username/dengue-ml-forecasting.git
 cd dengue-ml-forecasting
 ```
 
-2. Create and activate virtual environment:
+2. **Create Virtual Environment**
+<details>
+<summary>Windows</summary>
+
 ```bash
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+venv\Scripts\activate
 ```
+</details>
 
-3. Install dependencies:
+<details>
+<summary>Linux/Mac</summary>
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+</details>
+
+3. **Install Dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+### 📊 R Setup
 
-### Data Preparation
-Place your dengue fever case data in `data/dataset_dengue.csv` with columns:
-- time: Date in YYYY-MM-DD format
-- n: Number of cases
+1. **Install Required Packages**
+```r
+# Install renv
+install.packages("renv")
 
-### Running Models
-
-1. Neural Network (NNAR):
-```bash
-python models/ann_model.py
+# Initialize and restore dependencies
+renv::init()
+renv::restore()
 ```
 
-2. ARIMA:
-```bash
-python models/arima_model.py
+## 🚀 Usage
+
+### 📊 Data Format
+Place your data in `data/dataset_dengue.csv`:
+```csv
+time,n
+2015-01,123
+2015-02,456
+...
 ```
 
-3. Random Forest:
+### 🐍 Python Implementation
+
+1. **NNAR Model**
 ```bash
-python models/random_forest_model.py
+python python/ann_model.py
 ```
 
-4. Decomposition Analysis:
+2. **ARIMA Model**
 ```bash
-python models/decomposition.py
+python python/arima_model.py
 ```
 
-## Results
+3. **Random Forest**
+```bash
+python python/random_forest_model.py
+```
 
-The models produce various visualizations and metrics:
+4. **Decomposition Analysis**
+```bash
+python python/decomposition.py
+```
 
-- Training/validation loss curves
-- Actual vs predicted plots
-- Residual analysis plots
-- Feature importance plots (Random Forest)
-- Seasonal decomposition plots
-- Error metrics (MSE, RMSE, MAPE)
+### 📈 R Implementation
 
-## Contributing
+1. **NNAR Model**
+```r
+source("R/ann_model.R")
+```
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. **ARIMA Model**
+```r
+source("R/arima_model.R")
+```
 
-## Authors
-- Varees Adulyasas
-- Wafeeqismail Noipom
-- Rattifa Kasa
-- Marusdee Yusoh
+3. **Random Forest**
+```r
+source("R/random_forest_model.R")
+```
 
-## License
+4. **Decomposition Analysis**
+```r
+source("R/decomposition.R")
+```
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## ⚙️ Model Details
 
-## Citation
+### 🔧 Parameter Customization
 
-If you use this work in your research, please cite:
+<details>
+<summary>Python Configuration</summary>
+
+```python
+# NNAR
+model = NNARModel(
+    p=2,    # Non-seasonal lags
+    P=1,    # Seasonal lags
+    k=2     # Hidden nodes
+)
+
+# Random Forest
+rf_model = RandomForestModel(
+    n_estimators=100,
+    max_depth=None
+)
+
+# ARIMA
+arima_model = ARIMAModel(
+    order=(1,1,0)
+)
+```
+</details>
+
+<details>
+<summary>R Configuration</summary>
+
+```r
+# NNAR
+model <- nnetar(y, p=2, P=1, size=2)
+
+# Random Forest
+rf_model <- randomForest(
+    formula,
+    ntree=100,
+    mtry=3
+)
+
+# ARIMA
+arima_model <- auto.arima(
+    y,
+    seasonal=FALSE,
+    stepwise=TRUE
+)
+```
+</details>
+
+### 📊 Model Outputs
+
+Each model generates:
+
+- 📈 Performance Metrics
+  - MSE (Mean Squared Error)
+  - RMSE (Root Mean Squared Error)
+  - MAPE (Mean Absolute Percentage Error)
+
+- 🎨 Visualizations
+  - Actual vs Predicted plots
+  - Residual analysis
+  - Feature importance (Random Forest)
+  - Training history (NNAR)
+  - Seasonal decomposition plots
+
+Data visualization/Dengue forecasting dashboard
+https://vareesin.github.io/dengue-ml-forecasting/
+
+## 👥 Authors
+- 👩‍💻 **Varees Adulyasas**
+- 👨‍💻 **Wafeeqismail Noipom**
+- 👩‍💻 **Rattifa Kasa**
+- 👨‍🏫 **Marusdee Yusoh**
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📚 Citation
 
 ```bibtex
 @article{noipom2023dengue,
-  title={Developing a Trend Equation and Forecasting Model for Dengue Fever Incidence Using Time Series Data from 2015-2023},
-  author={Noipom, Wafeeqismail and Adulyasas, Varees and Kasa, Rattifa and Yusoh, Marusdee},
+  title={Developing a Trend Equation and Forecasting Model for 
+         Dengue Fever Incidence Using Time Series Data from 2015-2023},
+  author={Noipom, Wafeeqismail and Adulyasas, Varees and 
+          Kasa, Rattifa and Yusoh, Marusdee},
   year={2023}
 }
 ```
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- Ministry of Health Thailand for providing the dataset
-- Prince of Songkla University Pattani Campus for research support
-- Islamic Science Demonstration School for facilities and guidance
+- **Ministry of Health Thailand** for the dataset
+- **Prince of Songkla University Pattani Campus**
+- **Islamic Science Demonstration School**
+
+---
+<p align="center">
+Made with ❤️ by the Research Team
+</p>
