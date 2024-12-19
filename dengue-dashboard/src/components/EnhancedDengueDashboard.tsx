@@ -1,15 +1,19 @@
-import { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
-import { Brain, TreeDeciduous, Activity, AlertTriangle, Droplets } from 'lucide-react';
+import { Activity, AlertTriangle, Droplets } from 'lucide-react';
+
+interface DengueData {
+  month: string;
+  cases: number;
+}
+
 
 const EnhancedDengueDashboard = () => {
-  const [activeModel, setActiveModel] = useState('arima');
   const currentMonth = "Dec";
   const previousMonth = "Nov";
 
-  const realDengueData = [
+  const realDengueData: DengueData[] = [
     { month: "Jan", cases: 1054 },
     { month: "Feb", cases: 514 },
     { month: "Mar", cases: 415 },
@@ -24,14 +28,15 @@ const EnhancedDengueDashboard = () => {
     { month: "Dec", cases: 1436 }
   ];
 
-   // Model predictions data
-   const modelPredictions = realDengueData.map(data => ({
-    month: data.month,
-    actual: data.cases,
-    arima: data.cases * (1 + (Math.random() * 0.2 - 0.1)),
-    rf: data.cases * (1 + (Math.random() * 0.2 - 0.1)),
-    ann: data.cases * (1 + (Math.random() * 0.2 - 0.1))
-  }));
+  // Model predictions data
+     const modelPredictions = realDengueData.map(data => ({
+      month: data.month,
+      actual: data.cases,
+      arima: data.cases * (1 + (Math.random() * 0.2 - 0.1)),
+      rf: data.cases * (1 + (Math.random() * 0.2 - 0.1)),
+      ann: data.cases * (1 + (Math.random() * 0.2 - 0.1))
+    }));
+  // Model predictions data with type safety
 
   const modelMetrics = {
     arima: {
@@ -59,7 +64,11 @@ const EnhancedDengueDashboard = () => {
 
   const currentMonthData = realDengueData.find(d => d.month === currentMonth);
   const previousMonthData = realDengueData.find(d => d.month === previousMonth);
-  const monthlyChange = ((currentMonthData.cases - previousMonthData.cases) / previousMonthData.cases * 100).toFixed(1);
+  
+  const monthlyChange = currentMonthData && previousMonthData
+    ? Number(((currentMonthData.cases - previousMonthData.cases) / previousMonthData.cases * 100).toFixed(1))
+    : 0;
+ 
 
   const radarData = [
     { subject: 'Accuracy', ARIMA: 85, RF: 82, ANN: 88 },
@@ -103,7 +112,7 @@ const EnhancedDengueDashboard = () => {
   };
 
   const renderOverviewMetrics = () => (
-    <div className="grid grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-4 gap-4 mb-6">{
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
@@ -114,14 +123,14 @@ const EnhancedDengueDashboard = () => {
           <p className="text-sm text-gray-600">{currentMonth} 2023</p>
         </CardContent>
       </Card>
-      
+      }
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
             <Activity className="w-4 h-4" />
             <h3 className="font-medium">Current Cases</h3>
           </div>
-          <p className="text-xl font-bold text-blue-500">{currentMonthData.cases}</p>
+          <p className="text-xl font-bold text-blue-500">{currentMonthData?.cases || 0}</p>
           <p className="text-sm text-gray-600">Total for {currentMonth}</p>
         </CardContent>
       </Card>
@@ -138,7 +147,7 @@ const EnhancedDengueDashboard = () => {
           <p className="text-sm text-gray-600">vs {previousMonth}</p>
         </CardContent>
       </Card>
-      
+      {      
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
@@ -149,6 +158,7 @@ const EnhancedDengueDashboard = () => {
           <p className="text-sm text-gray-600">Current season</p>
         </CardContent>
       </Card>
+     }
     </div>
   );
 
@@ -350,10 +360,10 @@ const EnhancedDengueDashboard = () => {
                 <CardHeader>
                   <CardTitle>Download Presentation Documents</CardTitle>
                   <ul className="list-none space-y-2">
-                    <li><a href="documentations/4f36b41e-f890-48cf-a9f2-3ea4895b01fc.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Trend Equation and Compararive Analysis of ARIMA and Random Forest Models for Forecasting Dengue Fever Incidence Using Time Series Data : A Case Study of Health District 12, Thailand</a></li>
-                    <li><a href="documentations/35365fe3-000b-45cc-be63-ce74a47a3a46.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Comparative Analysis of ARIMA and ANN Models forForecasting Dengue Fever Incidence: A Case Study of HealthDistrict 12, Thailand</a></li>
-                    <li><a href="documentations/SVIT.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Forecasting Model for Dengue Fever Incidence Using Time Series Data : A Case Study of Health District 12, Thailand</a></li>
-                    <li><a href="documentations/ส่งแข่ง-1.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Trend Equation and Forecasting Model for Dengue Fever Incidence Using Time Series Data from 2015-2023 : A Case Study of Health District 12, Thailand</a></li>
+                    <li><a href="./documentations/4f36b41e-f890-48cf-a9f2-3ea4895b01fc.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Trend Equation and Compararive Analysis of ARIMA and Random Forest Models for Forecasting Dengue Fever Incidence Using Time Series Data : A Case Study of Health District 12, Thailand</a></li>
+                    <li><a href="./documentations/35365fe3-000b-45cc-be63-ce74a47a3a46.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Comparative Analysis of ARIMA and ANN Models forForecasting Dengue Fever Incidence: A Case Study of HealthDistrict 12, Thailand</a></li>
+                    <li><a href="./documentations/SVIT.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Forecasting Model for Dengue Fever Incidence Using Time Series Data : A Case Study of Health District 12, Thailand</a></li>
+                    <li><a href="./documentations/ส่งแข่ง-1.pdf" download className="text-blue-500 hover:text-blue-700 hover:underline">Developing a Trend Equation and Forecasting Model for Dengue Fever Incidence Using Time Series Data from 2015-2023 : A Case Study of Health District 12, Thailand</a></li>
                     </ul>
                 </CardHeader>
               </Card>
@@ -455,23 +465,23 @@ const EnhancedDengueDashboard = () => {
     <CardContent>
       <div className="grid grid-cols-3 gap-4">
         <img
-          src="images/1734620858627.jpg"
+          src="./images/1734620858627.jpg"
           className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
         />
         <img
-          src="images/1734620932356.jpg"
+          src="./images/1734620932356.jpg"
           className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
         />
         <img
-          src="images/1734620819527.jpg"
+          src="./images/1734620819527.jpg"
           className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
         />
         <img
-          src="images/1734620895666.jpg"
+          src="./images/1734620895666.jpg"
           className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
         />
         <img
-          src="images/1734606122326.jpg"
+          src="./images/1734606122326.jpg"
           className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
         />
       </div>
