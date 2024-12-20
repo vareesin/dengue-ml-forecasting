@@ -20,11 +20,6 @@ dengue-ml-forecasting/
 │   ├── 📄 random_forest_model.R
 │   ├── 📄 ann_model.R
 │   └── 📄 decomposition.R
-├── 📂 python/
-│   ├── 📄 arima_model.py
-│   ├── 📄 random_forest_model.py
-│   ├── 📄 ann_model.py
-│   └── 📄 decomposition.py
 ├── 📂 results/
 │   └── 📂 figures/
 ├── 📄 requirements.txt
@@ -33,19 +28,6 @@ dengue-ml-forecasting/
 ```
 
 ## 💻 Installation
-
-### 🐍 Python Setup
-
-1. **Clone Repository**
-```bash
-git clone https://github.com/vareesin/dengue-ml-forecasting.git
-cd dengue-ml-forecasting
-```
-
-2. **Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
 
 ### 📊 R Setup
 
@@ -67,28 +49,6 @@ Place your data in `data/dataset_dengue.csv`:
 time,n
 2015-01,123
 2015-02,456
-```
-
-### Python Implementation
-
-1. **NNAR Model**
-```bash
-python python/ann_model.py
-```
-
-2. **ARIMA Model**
-```bash
-python python/arima_model.py
-```
-
-3. **Random Forest**
-```bash
-python python/random_forest_model.py
-```
-
-4. **Decomposition Analysis**
-```bash
-python python/decomposition.py
 ```
 
 ### R Implementation
