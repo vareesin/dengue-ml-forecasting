@@ -27,7 +27,6 @@ dengue-ml-forecasting/
 │   └── 📄 decomposition.py
 ├── 📂 results/
 │   └── 📂 figures/
-├── 📄 requirements.txt
 ├── 📄 renv.lock
 └── 📄 README.md
 ```
